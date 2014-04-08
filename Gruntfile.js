@@ -1,6 +1,6 @@
 /*
- * grunt-static-version
- * https://github.com/ajmichels/grunt-static-version
+ * grunt-uniqueify
+ * https://github.com/ajmichels/grunt-uniqueify
  *
  * Copyright (c) 2014 AJ Michels
  * Licensed under the MIT license.
@@ -29,7 +29,7 @@ module.exports = function(grunt) {
     },
 
     // Configuration to be run (and then tested).
-    static_version: {
+    uniqueify: {
       default_options: {
         options: {
         },
@@ -65,7 +65,7 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'static_version', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'uniqueify', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);

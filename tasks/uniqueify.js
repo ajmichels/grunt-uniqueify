@@ -1,6 +1,6 @@
 /*
- * grunt-static-version
- * https://github.com/ajmichels/grunt-static-version
+ * grunt-uniqueify
+ * https://github.com/ajmichels/grunt-uniqueify
  *
  * Copyright (c) 2014 AJ Michels
  * Licensed under the MIT license.
