@@ -9,13 +9,12 @@
  *
  */
 
-'use strict';
-
 var crypto = require('crypto');
 var path = require('path');
 var fs = require('fs');
 
 module.exports = function(grunt) {
+    'use strict';
 
     var fileHash = function(filepath, algorithm) {
         var hash = crypto.createHash(algorithm);
