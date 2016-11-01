@@ -24,7 +24,7 @@ module.exports = function(grunt) {
     };
 
     var textReplace = function(src, find, replace, filePath) {
-        var newText = src.replace(find, replace);
+        var newText = src.replace(new RegExp(find, 'g'), replace);
         if (newText != src) {
             grunt.log.write(filePath + ' : ' + find + ' ').ok(replace);
         }
