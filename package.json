@@ -8,6 +8,12 @@
     "email": "ajmichels.web@gmail.com",
     "url": "http://ajmichels.com"
   },
+  "contributors": [
+    {
+      "name": "John Coleman",
+      "url": "https://github.com/TheNewCoke"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/ajmichels/grunt-uniqueify.git"
