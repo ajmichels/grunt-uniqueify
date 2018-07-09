@@ -18,7 +18,7 @@ module.exports = function(grunt) {
 
     var fileHash = function(filepath, algorithm) {
         var hash = crypto.createHash(algorithm);
-        grunt.log.verbose.write('Hashing ' + filepath + '...');
+        grunt.verbose.write('Hashing ' + filepath + '...');
         hash.update(grunt.file.read(filepath));
         return hash.digest('hex');
     };
@@ -26,7 +26,7 @@ module.exports = function(grunt) {
     var textReplace = function(src, find, replace, filePath) {
         var newText = src.replace(new RegExp(find, 'g'), replace);
         if (newText != src) {
-            grunt.log.write(filePath + ' : ' + find + ' ').ok(replace);
+            grunt.verbose.write(filePath + ' : ' + find + ' ').ok(replace);
         }
         return newText;
     };
@@ -36,11 +36,16 @@ module.exports = function(grunt) {
             algorithm: 'md5',
             length: 8
         });
+        var totals = {
+            renamed: 0,
+            updated: 0
+        };
 
         // Rename the file
         grunt.event.on('uniqueify.rename', function(oldFile, newFile){
             fs.renameSync(oldFile, newFile);
-            grunt.log.write(oldFile + ' ').ok(newFile);
+            totals.renamed++;
+            grunt.verbose.write(oldFile + ' ').ok(newFile);
         });
 
         // Replace instances of filename in code
@@ -59,6 +64,7 @@ module.exports = function(grunt) {
                             return textReplace(text, find, replace, filePath);
                         }
                     });
+                    totals.updated++;
                 });
             }
 
@@ -81,6 +87,18 @@ module.exports = function(grunt) {
             });
 
         });
+
+        if (totals.renamed > 0) {
+            grunt.log.ok(totals.renamed + ' ' + grunt.util.pluralize(totals.renamed, 'file/files') + ' renamed.')
+        } else {
+            grunt.log.warn('No files renamed.')
+        }
+
+        if (totals.updated > 0) {
+            grunt.log.ok('References in ' + totals.updated + ' ' + grunt.util.pluralize(totals.updated, 'file/files') + ' updated.')
+        } else {
+            grunt.log.warn('No references updated.')
+        }
 
     });
 
